@@ -64,13 +64,21 @@ fn find_sidecar() -> Option<PathBuf> {
     let exe_dir = exe_path.parent()?;
 
     let daemon_name = format!("yola-daemon{}", std::env::consts::EXE_SUFFIX);
-    let sidecar_path = exe_dir.join(&daemon_name);
 
-    if sidecar_path.exists() {
-        Some(sidecar_path)
-    } else {
-        None
+    // Buscar en múltiples ubicaciones (orden de prioridad):
+    let candidates = vec![
+        exe_dir.join(&daemon_name),                           // mismo dir que el .exe
+        exe_dir.join("resources").join(&daemon_name),          // Tauri resources/
+        exe_dir.join("target").join("release").join(&daemon_name), // legacy resources
+        exe_dir.parent().unwrap_or(exe_dir).join(&daemon_name),
+    ];
+
+    for path in candidates {
+        if path.exists() {
+            return Some(path);
+        }
     }
+    None
 }
 
 // ── Daemon Launch ───────────────────────────────────────────────────────────
