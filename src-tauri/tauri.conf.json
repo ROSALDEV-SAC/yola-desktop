@@ -29,8 +29,7 @@
     "active": true,
     "targets": ["msi", "nsis", "dmg", "deb", "appimage"],
     "resources": [
-      "yola-daemon.exe",
-      "yola-daemon"
+      "yola-daemon.exe"
     ],
     "icon": [
       "icons/32x32.png",
