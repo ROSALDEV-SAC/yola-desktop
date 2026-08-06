@@ -22,7 +22,7 @@ struct DaemonState {
 }
 
 const DAEMON_PORT: u16 = 7779;
-const DAEMON_TIMEOUT_SECS: u64 = 15;
+const DAEMON_TIMEOUT_SECS: u64 = 90;
 const DAEMON_POLL_MS: u64 = 500;
 
 // ── Health Check ────────────────────────────────────────────────────────────
@@ -85,9 +85,11 @@ fn find_sidecar() -> Option<PathBuf> {
 
 /// Lanza el daemon como proceso hijo con --port y --foreground.
 fn launch_daemon(sidecar_path: &std::path::Path, port: u16) -> Result<Child, String> {
-    Command::new(sidecar_path)
-        .args(["start", "--port", &port.to_string(), "--foreground"])
-        .spawn()
+    let mut cmd = Command::new(sidecar_path);
+    cmd.args(["start", "--port", &port.to_string(), "--foreground"])
+       .env("YOLA_BIND", "0.0.0.0");
+
+    cmd.spawn()
         .map_err(|e| format!("No se pudo iniciar el daemon: {}", e))
 }
 
@@ -196,6 +198,14 @@ pub fn run() {
             // Mostrar la ventana principal (estaba oculta: visible=false en config)
             if let Some(window) = app.get_webview_window("main") {
                 window.show().map_err(|e| format!("No se pudo mostrar la ventana: {}", e))?;
+            }
+
+            // Inyectar URL del daemon en el WebView para que si-yola sepa dónde conectarse
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.eval(&format!(
+                    "window.__YOLA_DAEMON_URL__ = 'http://127.0.0.1:{}'; console.log('[Tauri] Daemon URL injected:', window.__YOLA_DAEMON_URL__);",
+                    DAEMON_PORT
+                ));
             }
 
             Ok(())

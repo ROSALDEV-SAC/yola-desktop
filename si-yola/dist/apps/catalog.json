@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "updated": "2026-08-03",
+  "apps": [
+    {
+      "id": "yola-code",
+      "name": "YOLA Code",
+      "author": "YOLA",
+      "repo": "github.com/SayriDevs/YolaCode",
+      "icon": "🧑‍💻",
+      "category": "Dev",
+      "description": "El editor nativo de YOLA — producto independiente: su código vive en su propio repo, aquí solo se referencia.",
+      "version": "0.3.3",
+      "manifestUrl": "https://cdn.jsdelivr.net/gh/SayriDevs/YolaCode@main/manifest.json",
+      "permissions": ["notify", "openApp", "files"]
+    }
+  ]
+}

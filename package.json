@@ -1,7 +1,7 @@
 {
   "name": "yola-desktop",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "YOLA Desktop — Empaquetador final: si-yola + yola-daemon en app nativa",
   "type": "module",
   "scripts": {

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;display:flex;align-items:center;justify-content:center;height:100vh;font-family:system-ui,sans-serif;overflow:hidden}
+.wrap{text-align:center}
+.cat{font-size:64px;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.1)}}
+.title{color:#a09bfe;font-size:28px;font-weight:700;margin-top:8px}
+.status{color:rgba(255,255,255,.5);font-size:14px;margin-top:16px;min-height:20px}
+</style></head><body>
+<div class="wrap">
+  <div class="cat">🐱</div>
+  <div class="title">YOLA</div>
+  <div class="status" id="status">Iniciando...</div>
+</div>
+<script>
+const PORT = 7779;
+const MAX_RETRIES = 60; // ~30 segundos (60 * 500ms)
+let retries = 0;
+
+function check() {
+  fetch(`http://localhost:${PORT}/api/v1/health`, { signal: AbortSignal.timeout(2000) })
+    .then(r => r.json())
+    .then(data => {
+      if (data.healthy || data.status === 'ok') {
+        document.getElementById('status').textContent = 'Listo. Cargando YOLA...';
+        setTimeout(() => { location.href = '/index.html'; }, 300);
+        return;
+      }
+      retry();
+    })
+    .catch(() => retry());
+}
+
+function retry() {
+  retries++;
+  if (retries >= MAX_RETRIES) {
+    document.getElementById('status').innerHTML = 'No se pudo conectar al daemon.<br><small>Reintentá en unos segundos...</small>';
+    setTimeout(() => { retries = 0; check(); }, 3000);
+    return;
+  }
+  document.getElementById('status').textContent = `Iniciando daemon... (${retries})`;
+  setTimeout(check, 500);
+}
+
+check();
+</script>
+</body></html>
