@@ -222,15 +222,6 @@ pub fn run() {
             }
 
             println!("[YOLA] Listo. Abriendo YOLA...");
-
-            // Cerrar splash screen y mostrar ventana principal
-            if let Some(splash) = app.get_webview_window("splashscreen") {
-                splash.close().ok();
-            }
-            if let Some(window) = app.get_webview_window("main") {
-                window.show().map_err(|e| format!("No se pudo mostrar la ventana: {}", e))?;
-            }
-
             Ok(())
         })
         .on_window_event(|window, event| {
