@@ -1,4 +1,8 @@
+[![Download](https://img.shields.io/badge/download-latest-blue)](https://github.com/ROSALDEV-SAC/yola-desktop/releases/latest)
+
 # yola-desktop -- YOLA Desktop App
+
+![YOLA Desktop screenshot placeholder](docs/screenshot.png)
 
 Wrapper Tauri v2 que empaqueta si-yola + yola-daemon como aplicacion de
 escritorio nativa para Windows, Mac y Linux. Doble clic -> YOLA viva.
