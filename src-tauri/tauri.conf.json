@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tauri-apps/tauri/dev/crates/tauri-cli/schema.json",
+  "productName": "YOLA",
+  "version": "0.1.0",
+  "identifier": "com.yolabysayri.yola-desktop",
+  "build": {
+    "frontendDist": "../si-yola/dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "",
+    "beforeBuildCommand": "cd ../si-yola && npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "YOLA",
+        "width": 1200,
+        "height": 800,
+        "resizable": true,
+        "decorations": true,
+        "label": "main",
+        "visible": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["msi", "nsis", "dmg", "deb", "appimage"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

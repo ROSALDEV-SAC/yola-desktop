@@ -1,0 +1,14 @@
+D:\Workspace Miaw\CUERPOS_YOLA\yola-desktop\src-tauri\target\debug\deps\thiserror-c11a3b2eafad5152.d: C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\lib.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\aserror.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\display.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\var.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\private.rs D:\Workspace\ Miaw\CUERPOS_YOLA\yola-desktop\src-tauri\target\debug\build\thiserror-4eedfefd4cb4c706\out/private.rs
+
+D:\Workspace Miaw\CUERPOS_YOLA\yola-desktop\src-tauri\target\debug\deps\libthiserror-c11a3b2eafad5152.rlib: C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\lib.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\aserror.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\display.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\var.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\private.rs D:\Workspace\ Miaw\CUERPOS_YOLA\yola-desktop\src-tauri\target\debug\build\thiserror-4eedfefd4cb4c706\out/private.rs
+
+D:\Workspace Miaw\CUERPOS_YOLA\yola-desktop\src-tauri\target\debug\deps\libthiserror-c11a3b2eafad5152.rmeta: C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\lib.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\aserror.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\display.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\var.rs C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\private.rs D:\Workspace\ Miaw\CUERPOS_YOLA\yola-desktop\src-tauri\target\debug\build\thiserror-4eedfefd4cb4c706\out/private.rs
+
+C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\lib.rs:
+C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\aserror.rs:
+C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\display.rs:
+C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\var.rs:
+C:\Users\Sayri\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\thiserror-2.0.19\src\private.rs:
+D:\Workspace\ Miaw\CUERPOS_YOLA\yola-desktop\src-tauri\target\debug\build\thiserror-4eedfefd4cb4c706\out/private.rs:
+
+# env-dep:OUT_DIR=D:\\Workspace Miaw\\CUERPOS_YOLA\\yola-desktop\\src-tauri\\target\\debug\\build\\thiserror-4eedfefd4cb4c706\\out

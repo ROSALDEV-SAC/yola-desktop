@@ -1,0 +1,14 @@
+{
+  "name": "yola-desktop",
+  "private": true,
+  "version": "0.1.0",
+  "description": "YOLA Desktop — Empaquetador final: si-yola + yola-daemon en app nativa",
+  "type": "module",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

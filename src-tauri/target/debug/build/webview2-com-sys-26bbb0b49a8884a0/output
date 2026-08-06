@@ -1,0 +1,2 @@
+cargo:rustc-link-search=native=D:\Workspace Miaw\CUERPOS_YOLA\yola-desktop\src-tauri\target\debug\build\webview2-com-sys-26bbb0b49a8884a0\out\x64
+cargo:rustc-link-lib=advapi32
