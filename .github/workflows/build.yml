@@ -15,6 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Checkout si-yola
+        uses: actions/checkout@v4
+        with:
+          repository: ROSALDEV-SAC/si-yola
+          path: ../si-yola
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
@@ -24,10 +30,27 @@ jobs:
         run: bun install
 
       - name: Build si-yola frontend
+        working-directory: ../si-yola
         run: |
-          cd ../si-yola
           bun install
           bun run build
+
+      - name: Download daemon (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          curl -L "https://github.com/ROSALDEV-SAC/yola-releases/releases/latest/download/yola-daemon-win.exe" -o src-tauri/yola-daemon.exe 2>/dev/null || echo "Daemon no disponible en releases — build sin sidecar"
+
+      - name: Download daemon (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          curl -L "https://github.com/ROSALDEV-SAC/yola-releases/releases/latest/download/yola-daemon-linux" -o src-tauri/yola-daemon 2>/dev/null || echo "Daemon no disponible en releases"
+          chmod +x src-tauri/yola-daemon 2>/dev/null || true
+
+      - name: Download daemon (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          curl -L "https://github.com/ROSALDEV-SAC/yola-releases/releases/latest/download/yola-daemon-macos" -o src-tauri/yola-daemon 2>/dev/null || echo "Daemon no disponible en releases"
+          chmod +x src-tauri/yola-daemon 2>/dev/null || true
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
