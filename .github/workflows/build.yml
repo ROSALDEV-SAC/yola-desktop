@@ -41,6 +41,13 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Cache Bun
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          restore-keys: ${{ runner.os }}-bun-
+
       - name: Build yola-client-ts SDK
         run: |
           cd ../yola-client-ts
@@ -73,6 +80,16 @@ jobs:
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            src-tauri/target
+          key: ${{ runner.os }}-cargo-desktop-${{ hashFiles('src-tauri/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-desktop-
 
       - name: Build Tauri app
         run: bun run tauri build
