@@ -11,11 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Checkout si-yola
-        uses: actions/checkout@v4
-        with:
-          repository: ROSALDEV-SAC/si-yola
-          path: ../si-yola
+      - name: Clone si-yola
+        run: git clone https://github.com/ROSALDEV-SAC/si-yola.git ../si-yola
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -26,8 +23,8 @@ jobs:
         run: bun install
 
       - name: Build si-yola frontend
-        working-directory: ../si-yola
         run: |
+          cd ../si-yola
           bun install
           bun run build
 
