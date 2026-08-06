@@ -5,7 +5,7 @@
   "identifier": "com.yolabysayri.yola-desktop",
   "build": {
     "frontendDist": "../../si-yola/dist",
-    "devUrl": "http://localhost:5173/splashscreen.html",
+    "devUrl": "http://localhost:5173",
     "beforeDevCommand": "",
     "beforeBuildCommand": ""
   },
@@ -17,7 +17,8 @@
         "height": 800,
         "resizable": true,
         "decorations": true,
-        "label": "main"
+        "label": "main",
+        "visible": false
       }
     ],
     "security": {
