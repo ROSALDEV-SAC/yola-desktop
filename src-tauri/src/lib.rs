@@ -197,13 +197,22 @@ pub fn run() {
 
                 println!("[YOLA] Daemon listo.");
 
-                // Watchdog: si el daemon muere, cerrar el desktop
+                // Watchdog: si el daemon muere 3 veces seguidas, cerrar el desktop
                 let handle = app.handle().clone();
                 tokio::spawn(async move {
+                    let mut failures = 0u32;
+                    // Grace period: primeros 30s no verifica (daemon puede estar cargando modelos)
+                    tokio::time::sleep(std::time::Duration::from_secs(30)).await;
                     loop {
                         tokio::time::sleep(std::time::Duration::from_secs(5)).await;
                         if !check_daemon_health(DAEMON_PORT) {
-                            eprintln!("[YOLA] Daemon murió. Cerrando desktop...");
+                            failures += 1;
+                            eprintln!("[YOLA] Watchdog: daemon no responde (intento {}/3)", failures);
+                        } else {
+                            failures = 0;
+                        }
+                        if failures >= 3 {
+                            eprintln!("[YOLA] Daemon murió tras 3 intentos. Cerrando desktop...");
                             handle.exit(1);
                         }
                     }
