@@ -28,7 +28,7 @@
   "bundle": {
     "active": true,
     "targets": ["msi", "nsis", "dmg", "deb", "appimage"],
-    "createUpdaterArtifacts": false,
+    "createUpdaterArtifacts": true,
     "resources": [
       "yola-daemon.exe"
     ],
@@ -39,5 +39,16 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://github.com/ROSALDEV-SAC/yola-desktop/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY2OTAxNjM0QkUwN0VFOEQKUldTTjdnZStOQmFROWdkRTBkNUFqRWdQbVJRTUdzVXRDcDh6WmFIVnpYMHA4a3RIUTZ2UUVmdzAK",
+      "windows": {
+        "installMode": "passive"
+      }
+    }
   }
 }
