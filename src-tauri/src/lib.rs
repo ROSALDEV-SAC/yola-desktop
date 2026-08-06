@@ -84,10 +84,19 @@ fn find_sidecar() -> Option<PathBuf> {
 // ── Daemon Launch ───────────────────────────────────────────────────────────
 
 /// Lanza el daemon como proceso hijo con --port y --foreground.
+/// En Windows oculta la ventana de terminal (CREATE_NO_WINDOW).
 fn launch_daemon(sidecar_path: &std::path::Path, port: u16) -> Result<Child, String> {
-    Command::new(sidecar_path)
-        .args(["start", "--port", &port.to_string(), "--foreground"])
-        .spawn()
+    let mut cmd = Command::new(sidecar_path);
+    cmd.args(["start", "--port", &port.to_string(), "--foreground"]);
+
+    #[cfg(target_os = "windows")]
+    {
+        use std::os::windows::process::CommandExt;
+        const CREATE_NO_WINDOW: u32 = 0x08000000;
+        cmd.creation_flags(CREATE_NO_WINDOW);
+    }
+
+    cmd.spawn()
         .map_err(|e| format!("No se pudo iniciar el daemon: {}", e))
 }
 
@@ -187,6 +196,18 @@ pub fn run() {
                 }
 
                 println!("[YOLA] Daemon listo.");
+
+                // Watchdog: si el daemon muere, cerrar el desktop
+                let handle = app.handle().clone();
+                tokio::spawn(async move {
+                    loop {
+                        tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+                        if !check_daemon_health(DAEMON_PORT) {
+                            eprintln!("[YOLA] Daemon murió. Cerrando desktop...");
+                            handle.exit(1);
+                        }
+                    }
+                });
             } else {
                 println!("[YOLA] Daemon ya está corriendo.");
             }
