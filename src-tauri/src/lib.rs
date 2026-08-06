@@ -14,6 +14,8 @@ use std::process::{Child, Command};
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
 
+use tauri::menu::{MenuBuilder, MenuItemBuilder};
+use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
 use tauri::Manager;
 
 /// Estado compartido: guarda el proceso hijo del daemon (si fue lanzado por nosotros).
@@ -131,6 +133,50 @@ pub fn run() {
         .setup(|app| {
             println!("[YOLA] Iniciando YOLA Desktop...");
 
+            // ── System Tray ─────────────────────────────────────────────
+            let show_item = MenuItemBuilder::with_id("show", "Mostrar YOLA").build(app)?;
+            let quit_item = MenuItemBuilder::with_id("quit", "Salir").build(app)?;
+            let tray_menu = MenuBuilder::new(app)
+                .item(&show_item)
+                .item(&quit_item)
+                .build()?;
+
+            let _tray = TrayIconBuilder::new()
+                .icon(app.default_window_icon().unwrap().clone())
+                .menu(&tray_menu)
+                .on_menu_event(|app_handle, event| {
+                    match event.id().as_ref() {
+                        "show" => {
+                            if let Some(window) = app_handle.get_webview_window("main") {
+                                let _ = window.show();
+                                let _ = window.set_focus();
+                            }
+                        }
+                        "quit" => {
+                            let state = app_handle.state::<DaemonState>();
+                            kill_daemon(&state);
+                            app_handle.exit(0);
+                        }
+                        _ => {}
+                    }
+                })
+                .on_tray_icon_event(|tray, event| {
+                    if let TrayIconEvent::Click {
+                        button: MouseButton::Left,
+                        button_state: MouseButtonState::Up,
+                        ..
+                    } = event
+                    {
+                        let app_handle = tray.app_handle();
+                        if let Some(window) = app_handle.get_webview_window("main") {
+                            let _ = window.show();
+                            let _ = window.set_focus();
+                        }
+                    }
+                })
+                .build(app)?;
+            // ── End System Tray ─────────────────────────────────────────
+
             // 1. Chequear si el daemon ya está corriendo
             println!("[YOLA] Verificando conexión al daemon en puerto {}...", DAEMON_PORT);
 
@@ -211,10 +257,10 @@ pub fn run() {
             Ok(())
         })
         .on_window_event(|window, event| {
-            if let tauri::WindowEvent::CloseRequested { .. } = event {
-                eprintln!("[YOLA] Ventana cerrada. Limpiando...");
-                let state = window.state::<DaemonState>();
-                kill_daemon(&state);
+            if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                // Minimizar a tray en vez de cerrar
+                let _ = window.hide();
+                api.prevent_close();
             }
         })
         .manage(DaemonState {
