@@ -1,3 +1,5 @@
+[![Release](https://img.shields.io/github/v/release/ROSALDEV-SAC/yola-desktop?color=6C5CE7)](https://github.com/ROSALDEV-SAC/yola-desktop/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Download](https://img.shields.io/badge/download-latest-blue)](https://github.com/ROSALDEV-SAC/yola-desktop/releases/latest)
 
 # yola-desktop -- YOLA Desktop App
