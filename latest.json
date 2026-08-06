@@ -1,0 +1,11 @@
+{
+  "version": "0.1.1",
+  "notes": "YOLA Desktop v0.1.1 — Primer release con auto-update.",
+  "pub_date": "2026-08-06T00:00:00Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "PLACEHOLDER",
+      "url": "https://github.com/ROSALDEV-SAC/yola-desktop/releases/latest/download/YOLA_0.1.1_x64-setup.exe"
+    }
+  }
+}
