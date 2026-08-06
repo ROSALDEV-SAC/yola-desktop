@@ -13,6 +13,17 @@
     "windows": [
       {
         "title": "YOLA",
+        "label": "splashscreen",
+        "url": "splashscreen.html",
+        "width": 400,
+        "height": 300,
+        "center": true,
+        "decorations": false,
+        "resizable": false,
+        "alwaysOnTop": true
+      },
+      {
+        "title": "YOLA",
         "width": 1200,
         "height": 800,
         "resizable": true,

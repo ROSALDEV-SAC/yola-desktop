@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;display:flex;align-items:center;justify-content:center;height:100vh;font-family:system-ui,sans-serif;overflow:hidden}
+.wrap{text-align:center}
+.cat{font-size:64px;animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.1)}}
+.title{color:#a09bfe;font-size:28px;font-weight:700;margin-top:8px}
+.status{color:rgba(255,255,255,.5);font-size:14px;margin-top:16px;min-height:20px}
+.dots::after{content:'';animation:dots 1.5s steps(3,infinite)}@keyframes dots{0%{content:''}33%{content:'.'}66%{content:'..'}100%{content:'...'}}
+</style></head><body>
+<div class="wrap">
+  <div class="cat">🐱</div>
+  <div class="title">YOLA</div>
+  <div class="status"><span class="dots">Iniciando</span></div>
+</div>
+</body></html>
