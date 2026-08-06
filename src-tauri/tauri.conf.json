@@ -45,7 +45,7 @@
       "endpoints": [
         "https://github.com/ROSALDEV-SAC/yola-desktop/releases/latest/download/latest.json"
       ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEY2OTAxNjM0QkUwN0VFOEQKUldTTjdnZStOQmFROWdkRTBkNUFqRWdQbVJRTUdzVXRDcDh6WmFIVnpYMHA4a3RIUTZ2UUVmdzAK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEU4MkNFNzM3QzdEM0M5MTUKUldRVnlkUEhOK2NzNklEOUNJL0xzU0hLWXVkNlhZaXc4VzZRdytWdXlqZmo4d2xaZ2I0Wk4xbEEK",
       "windows": {
         "installMode": "passive"
       }
