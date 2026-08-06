@@ -4,10 +4,10 @@
   "version": "0.1.0",
   "identifier": "com.yolabysayri.yola-desktop",
   "build": {
-    "frontendDist": "../si-yola/dist",
+    "frontendDist": "../../si-yola/dist",
     "devUrl": "http://localhost:5173",
     "beforeDevCommand": "",
-    "beforeBuildCommand": "cd ../si-yola && npm run build"
+    "beforeBuildCommand": ""
   },
   "app": {
     "windows": [
