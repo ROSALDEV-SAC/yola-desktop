@@ -141,23 +141,35 @@ pub fn run() {
                 .item(&quit_item)
                 .build()?;
 
+            let icon = app.default_window_icon()
+                .cloned()
+                .unwrap_or_else(|| {
+                    eprintln!("[YOLA] Ícono por defecto no encontrado, usando fallback.");
+                    tauri::image::Image::new(&[], 0, 0) // icono vacío, el tray usará genérico del SO
+                });
             let _tray = TrayIconBuilder::new()
-                .icon(app.default_window_icon().unwrap().clone())
+                .icon(icon)
                 .menu(&tray_menu)
                 .on_menu_event(|app_handle, event| {
                     match event.id().as_ref() {
                         "show" => {
+                            eprintln!("[YOLA] Tray: Mostrar YOLA");
                             if let Some(window) = app_handle.get_webview_window("main") {
                                 let _ = window.show();
                                 let _ = window.set_focus();
+                            } else {
+                                eprintln!("[YOLA] Tray: ventana 'main' no encontrada");
                             }
                         }
                         "quit" => {
+                            eprintln!("[YOLA] Tray: Salir");
                             let state = app_handle.state::<DaemonState>();
                             kill_daemon(&state);
                             app_handle.exit(0);
                         }
-                        _ => {}
+                        other => {
+                            eprintln!("[YOLA] Tray: evento de menú desconocido '{}'", other);
+                        }
                     }
                 })
                 .on_tray_icon_event(|tray, event| {
@@ -258,7 +270,7 @@ pub fn run() {
         })
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
-                // Minimizar a tray en vez de cerrar
+                eprintln!("[YOLA] Ventana cerrada — minimizando a bandeja");
                 let _ = window.hide();
                 api.prevent_close();
             }
